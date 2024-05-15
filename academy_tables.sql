@@ -86,8 +86,8 @@ INSERT INTO GROUPS (NAME, RATING, YEAR) VALUES
 CREATE TABLE TEACHERS (
 	ID SERIAL PRIMARY KEY,
 	EMPLOYMENT_DATE DATE NOT NULL CHECK (EMPLOYMENT_DATE >= '1990-01-01'),
-	IS_ASSISTANT BOOLEAN NOT NULL DEFAULT FALSE,
-	IS_PROFESSOR BOOLEAN NOT NULL DEFAULT FALSE,
+	IS_ASSISTANT BIT(1) NOT NULL DEFAULT B'0',
+	IS_PROFESSOR BIT(1) NOT NULL DEFAULT B'0',
 	NAME VARCHAR NOT NULL,
 	POSITION VARCHAR NOT NULL,
 	PREMIUM MONEY NOT NULL CHECK (PREMIUM >= 0::MONEY) DEFAULT 0.00,
@@ -95,24 +95,25 @@ CREATE TABLE TEACHERS (
 	SURNAME VARCHAR NOT NULL
 );
 
-INSERT INTO TEACHERS (EMPLOYMENT_DATE, IS_ASSISTANT, IS_PROFESSOR, NAME, POSITION, PREMIUM, SALARY, SURNAME) VALUES
-('1995-03-15', TRUE, FALSE, 'John', 'Lecturer', 500.00, 3000.00, 'Doe'),
-('2000-07-20', FALSE, TRUE, 'Alice', 'Professor', 1000.00, 5000.00, 'Smith'),
-('1998-11-10', TRUE, FALSE, 'Michael', 'Assistant Professor', 700.00, 3500.00, 'Johnson'),
-('2005-02-28', TRUE, FALSE, 'Emily', 'Lecturer', 600.00, 3200.00, 'Brown'),
-('2002-09-03', TRUE, FALSE, 'David', 'Lecturer', 550.00, 3100.00, 'Wilson'),
-('1997-06-12', FALSE, TRUE, 'Sarah', 'Professor', 1200.00, 6000.00, 'Thompson'),
-('2008-04-17', TRUE, FALSE, 'Robert', 'Assistant Professor', 800.00, 3700.00, 'Davis'),
-('2003-10-25', FALSE, TRUE, 'Laura', 'Professor', 1100.00, 5500.00, 'Martinez'),
-('1999-08-05', TRUE, FALSE, 'Daniel', 'Lecturer', 650.00, 3300.00, 'Taylor'),
-('2006-12-30', TRUE, FALSE, 'Rachel', 'Lecturer', 700.00, 3400.00, 'Lee'),
-('2001-05-08', FALSE, TRUE, 'Christopher', 'Professor', 1050.00, 5200.00, 'Clark'),
-('2004-01-19', FALSE, TRUE, 'Jennifer', 'Professor', 1250.00, 6200.00, 'White'),
-('1996-09-23', TRUE, FALSE, 'Matthew', 'Assistant Professor', 750.00, 3600.00, 'Harris'),
-('2007-08-11', TRUE, FALSE, 'Jessica', 'Lecturer', 680.00, 3350.00, 'Carter'),
-('2009-11-02', FALSE, TRUE, 'Andrew', 'Professor', 1150.00, 5800.00, 'Anderson'),
-('2000-03-14', TRUE, FALSE, 'Olivia', 'Assistant Professor', 720.00, 3650.00, 'Garcia'),
-('1998-02-09', TRUE, FALSE, 'William', 'Lecturer', 620.00, 3150.00, 'Thomas'),
-('2005-07-21', FALSE, TRUE, 'Stephanie', 'Professor', 1300.00, 6500.00, 'Moore'),
-('2002-04-05', TRUE, FALSE, 'Kevin', 'Lecturer', 670.00, 3250.00, 'Evans'),
-('2003-12-18', FALSE, TRUE, 'Amanda', 'Professor', 1350.00, 6700.00, 'Rodriguez');
+INSERT INTO TEACHERS (EMPLOYMENT_DATE, IS_ASSISTANT, IS_PROFESSOR, NAME, POSITION, PREMIUM, SALARY, SURNAME)
+VALUES
+('2005-01-01', B'0', B'1', 'John', 'Professor', 1500.00, 6000.00, 'Doe'),
+('2010-03-15', B'1', B'0', 'Alice', 'Assistant Professor', 1000.00, 4500.00, 'Smith'),
+('2008-07-20', B'0', B'0', 'Emma', 'Lecturer', 800.00, 4000.00, 'Johnson'),
+('2012-11-10', B'1', B'1', 'Michael', 'Associate Professor', 1200.00, 5500.00, 'Williams'),
+('2007-05-05', B'1', B'0', 'Sophia', 'Teaching Assistant', 600.00, 3500.00, 'Brown'),
+('2004-09-30', B'0', B'0', 'Matthew', 'Lecturer', 850.00, 4200.00, 'Jones'),
+('2015-02-18', B'1', B'1', 'Olivia', 'Full Professor', 2000.00, 7000.00, 'Davis'),
+('2018-06-22', B'0', B'1', 'Daniel', 'Professor', 1800.00, 6500.00, 'Miller'),
+('2006-12-03', B'1', B'0', 'Isabella', 'Assistant Professor', 1100.00, 4800.00, 'Wilson'),
+('2009-08-14', B'0', B'0', 'William', 'Lecturer', 750.00, 3900.00, 'Martinez'),
+('2013-04-27', B'1', B'1', 'Oliver', 'Associate Professor', 1300.00, 5700.00, 'Taylor'),
+('2016-10-09', B'0', B'0', 'Sophie', 'Lecturer', 900.00, 4300.00, 'Anderson'),
+('2003-11-21', B'1', B'0', 'Amelia', 'Teaching Assistant', 700.00, 3700.00, 'Thomas'),
+('2017-08-05', B'1', B'1', 'Benjamin', 'Full Professor', 2200.00, 7500.00, 'White'),
+('2002-07-15', B'0', B'1', 'Charlotte', 'Professor', 1600.00, 6200.00, 'Garcia'),
+('2019-01-25', B'1', B'0', 'Ethan', 'Assistant Professor', 1300.00, 5200.00, 'Lee'),
+('2001-05-12', B'0', B'0', 'Ava', 'Lecturer', 800.00, 4000.00, 'Hernandez'),
+('2014-09-08', B'1', B'1', 'Mia', 'Full Professor', 1900.00, 6800.00, 'Clark'),
+('2008-03-01', B'0', B'1', 'James', 'Professor', 1700.00, 6300.00, 'Lewis'),
+('2005-11-14', B'1', B'0', 'Harper', 'Assistant Professor', 1200.00, 4900.00, 'Young');

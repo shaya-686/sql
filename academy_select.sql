@@ -18,7 +18,7 @@ FROM FACULTIES;
 --Вивести прізвища професорів, ставка яких перевищує 1050.
 SELECT SURNAME
 FROM TEACHERS
-WHERE IS_PROFESSOR = TRUE AND SALARY > 5000::MONEY; 
+WHERE IS_PROFESSOR = B'1' AND SALARY > 5000::MONEY; 
 
 --Вивести назви кафедр, фонд фінансування яких менший, ніж 11000 або більший за 25000.
 SELECT NAME
@@ -33,17 +33,17 @@ WHERE LOWER(NAME) NOT LIKE 'faculty of nursing';
 --Вивести прізвища та посади викладачів, які не є професорами.
 SELECT SURNAME, POSITION
 FROM TEACHERS
-WHERE IS_PROFESSOR = FALSE;
+WHERE IS_PROFESSOR = B'0';
 
 --Вивести прізвища, посади, ставки та надбавки асистентів, надбавка яких у діапазоні від 160 до 550
 SELECT SURNAME, POSITION, SALARY, PREMIUM
 FROM TEACHERS
-WHERE IS_ASSISTANT = TRUE AND PREMIUM BETWEEN 160::MONEY AND 550::MONEY;
+WHERE IS_ASSISTANT = B'1' AND PREMIUM BETWEEN 160::MONEY AND 550::MONEY;
 
 --Вивести прізвища та ставки асистентів.
 SELECT SURNAME, SALARY
 FROM TEACHERS
-WHERE IS_ASSISTANT = TRUE;
+WHERE IS_ASSISTANT = B'1';
 
 --Вивести прізвища та посади викладачів, які були прийняті на роботу до 01.01.2000.
 SELECT SURNAME, POSITION
@@ -60,7 +60,7 @@ ORDER BY NAME;
 --Вивести прізвища асистентів із зарплатою (сума ставки та надбавки) не більше 1200.
 SELECT SURNAME
 FROM TEACHERS
-WHERE IS_ASSISTANT = TRUE AND SALARY + PREMIUM <= 4000::MONEY;
+WHERE IS_ASSISTANT = B'1' AND SALARY + PREMIUM <= 4200::MONEY;
 
 --Вивести назви груп 5-го курсу з рейтингом у діапазоні від 2 до 4.
 SELECT NAME
@@ -70,4 +70,4 @@ WHERE YEAR = 2 AND RATING BETWEEN 2 AND 4;
 --Вивести прізвища асистентів зі ставкою менше, ніж 550 або надбавкою менше, ніж 200.
 SELECT SURNAME
 FROM TEACHERS
-WHERE IS_ASSISTANT = TRUE AND SALARY < 3200::MONEY OR PREMIUM < 560::MONEY;
+WHERE IS_ASSISTANT = B'1' AND SALARY < 4200::MONEY OR PREMIUM < 560::MONEY;
