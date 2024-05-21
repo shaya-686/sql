@@ -26,4 +26,4 @@ class User(Base):
 
 # add table to db
 Base.metadata.create_all(bind=engine)
-
++
