@@ -75,10 +75,10 @@ def repor_donation_of_last_mounth():
 
 def report_departaments_donation():
     sponsor_name = input("Enter sponsor name: ")
-    result = session.query(deps.c.name.distinct()) \
+    result = session.query(deps.c.name) \
         .join(donations, deps.c.id == donations.c.department_id) \
         .join(sponsors, sponsors.c.id == donations.c.sponsor_id) \
-        .where(sponsors.c.name == sponsor_name)
+        .where(sponsors.c.name == sponsor_name).distinct()
     print(result)
     if result:
         for row in result:
