@@ -75,7 +75,7 @@ def repor_donation_of_last_mounth():
 
 def report_departaments_donation():
     sponsor_name = input("Enter sponsor name: ")
-    result = session.query(distinct(deps.c.name)) \
+    result = session.query(deps.c.name.distinct()) \
         .join(donations, deps.c.id == donations.c.department_id) \
         .join(sponsors, sponsors.c.id == donations.c.sponsor_id) \
         .where(sponsors.c.name == sponsor_name)
