@@ -1,6 +1,4 @@
 from sqlalchemy import create_engine, MetaData, insert, delete, update
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.orm import declarative_base
 import json
 
 with open("config.json", "r") as f:
@@ -8,7 +6,7 @@ with open("config.json", "r") as f:
     db_user = data['user']
     db_password = data['password']
 
-db_url = f'postgresql+psycopg2://{db_user}:{db_password}@localhost:5432/hospital'
+db_url = f'postgresql+psycopg2://{db_user}:{db_password}@localhost:5432/academy'
 engine = create_engine(db_url)
 
 # Base = declarative_base()
@@ -28,7 +26,6 @@ def insert_row(table):
             values[column_name] = value
 
     query = insert(table).values(values)
-    print(query)
     connection.execute(query)
     connection.commit()
     print("Done")
@@ -61,13 +58,7 @@ def delete_record(table):
     print("Columns names:")
     for column_name in table.columns.keys():
         print('\t', column_name)
-    # condition_column = input("Enter the column name for condition: ")
-    # condition_value = input("Enter the condition value for the column: ")
-    # column = getattr(table.c, condition_column)
-    # query = delete(table).where(column == column.type.python_type(condition_value))
-
     condition = input("Enter condition for one column: ")
-    #table.c.premium > 100
     query = delete(table).where(eval('table.c.' + condition))
     print(query)
     connection.execute(query)
@@ -77,7 +68,7 @@ def delete_record(table):
 
 while True:
 
-    print("Tables from 'hospital': ")
+    print("Tables from 'academy': ")
     for table_name in metadata.tables.keys():
         print(table_name)
 
