@@ -1,0 +1,97 @@
+root@DESKTOP-TN1FKGD:~# sudo service redis-server start
+root@DESKTOP-TN1FKGD:~# redis-cli
+127.0.0.1:6379> set user:name 'John Doe'
+OK
+127.0.0.1:6379> get user:name
+"John Doe"
+127.0.0.1:6379> rpush products:fruits 'apple' 'banana' 'orange'
+(integer) 3
+127.0.0.1:6379> lrange products:fruits 0 -1
+1) "apple"
+2) "banana"
+3) "orange"
+127.0.0.1:6379> hmset user:1 name 'Alice' age 25
+OK
+127.0.0.1:6379> hgetall user:1
+1) "name"
+2) "Alice"
+3) "age"
+4) "25"
+127.0.0.1:6379> sadd colors:tags 'red' 'green' 'blue'
+(integer) 3
+127.0.0.1:6379> smembers colors:tags
+1) "red"
+2) "green"
+3) "blue"
+127.0.0.1:6379> incr counter
+(integer) 1
+127.0.0.1:6379> get counter
+"1"
+127.0.0.1:6379> del user:name
+(integer) 1
+127.0.0.1:6379> exists user:name
+(integer) 0
+127.0.0.1:6379> setex user:message 60 'Hello, Redis!'
+OK
+127.0.0.1:6379> flushall
+OK
+127.0.0.1:6379> get user:message
+(nil)
+127.0.0.1:6379> get counter
+(nil)
+127.0.0.1:6379> geoadd user:geolocation 30.5 50.4 'Kyiv'
+(integer) 1
+127.0.0.1:6379> hset univercity:students 'Alice' 10 'Bob' 11 'John' 5
+(integer) 3
+127.0.0.1:6379> hgetall univercity:students
+1) "Alice"
+2) "10"
+3) "Bob"
+4) "11"
+5) "John"
+6) "5"
+127.0.0.1:6379> hset univercity:students 'Alice' 11
+(integer) 0
+127.0.0.1:6379> hgetall univercity:students
+1) "Alice"
+2) "11"
+3) "Bob"
+4) "11"
+5) "John"
+6) "5"
+127.0.0.1:6379> pfadd unique_users 111 222 333 444
+(integer) 1
+127.0.0.1:6379> pfcount unique_users
+(integer) 4
+127.0.0.1:6379> pfadd unique_users 111
+(integer) 0
+127.0.0.1:6379> pfcount unique_users
+(integer) 4
+127.0.0.1:6379> multi
+OK
+127.0.0.1:6379(TX)> set user:surname 'Smith'
+QUEUED
+127.0.0.1:6379(TX)> set user:password 123
+QUEUED
+127.0.0.1:6379(TX)> hset univercity:students 'Jack' 11
+QUEUED
+127.0.0.1:6379(TX)> hgetall univercity:students
+QUEUED
+127.0.0.1:6379(TX)> exec
+1) OK
+2) OK
+3) (integer) 1
+4) 1) "Alice"
+   2) "11"
+   3) "Bob"
+   4) "11"
+   5) "John"
+   6) "5"
+   7) "Jack"
+   8) "11"
+127.0.0.1:6379> get user:surname
+"Smith"
+127.0.0.1:6379> get user:password
+"123"
+127.0.0.1:6379> shutdown save
+not connected>
