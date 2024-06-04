@@ -214,7 +214,7 @@ while True:
     print("8. View people related to exhibit")
     print("9. View exhibits related to the person")
     print("10. View exhibits by description")
-    print("0. Exit")
+    print("0. Exit.")
 
     command = input("Enter the command: ")
     if command == "exit":
